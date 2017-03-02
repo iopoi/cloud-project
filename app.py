@@ -4,7 +4,6 @@ import ast
 import random
 from eliza import Eliza
 from tools import connection
-# from .eliza import Eliza
 
 from flask import Flask
 from flask import request
@@ -38,41 +37,51 @@ def eliza_page():
         return render_template('eliza.html', name=name, date=time.strftime('%d/%m %H:%M'))
     return render_template('eliza.html')
 
-@app.route('/adduser/', methods=['GET', 'POST'])
+@app.route('/adduser/', methods=['POST'])
 def add_user():
     if request.method == 'POST':
         username=request.form['username']
         password=request.form['password']
         emailaddr=request.form['emailaddr']
+        # TODO - check the database for email uniqueness
+
         return render_template('adduser.html', success=False)
     return render_template('adduser.html')
 
 
-@app.route('/verify/', methods=['GET', 'POST'])
+@app.route('/verify/', methods=['POST'])
 def verify():
     if request.method == 'POST':
+        # TODO - check the database for the correct email and key
+        # TODO - update the databse after the email has been verified
         return render_template('verify.html', success=False)
     return render_template('verify.html')
 
-@app.route('/login/', methods=['GET', 'POST'])
+@app.route('/login/', methods=['POST'])
 def login():
-    if request.method == 'POST'
+    if request.method == 'POST':
         username=request.form['username']
         password=request.form['password']
-        
+        # TODO - check for username, password and real-user-verification
+        #      - after login send a cookie to the user
+        # TODO - if chat history does not exist create it
         return render_template('login.html', success=True)
     return render_template('login.html')
 
-@app.route('/logout/')
+@app.route('/logout/', methods=['POST'])
 def logout():
+    # TODO - pop the cookie
+    #      - save the chat history
     return render_template('logout.html')
 
-@app.route('/listconv/')
+@app.route('/listconv/', methods=['POST'])
 def listconv():
+    # TODO - return the entire chat history in a JSON format
     pass
 
-@app.route('/getconv/')
+@app.route('/getconv/', methods=['POST'])
 def getconv():
+    # TODO - 
     pass
 
 if __name__ == '__main__':

@@ -12,7 +12,5 @@ def connection():
 
 def randomString():
     possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
-    return ''.join(random.sample(possible, 6))
+    return ''.join(random.sample(possible, 16))
 
-connection()
-randomString()
